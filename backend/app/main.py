@@ -5,10 +5,22 @@ SmartCal FastAPI Application Entrypoint
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
+import sys
+import os
 import logging
+from pathlib import Path
 
-from backend.app.api.routers import router
-from backend.app.db.connection import init_db
+# Add project root and backend dir to sys.path
+backend_dir = Path(__file__).resolve().parent.parent
+root_dir = backend_dir.parent
+sys.path.extend([str(backend_dir), str(root_dir)])
+
+try:
+    from app.api.routers import router
+    from app.db.connection import init_db
+except ImportError:
+    from backend.app.api.routers import router
+    from backend.app.db.connection import init_db
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("smartcal")

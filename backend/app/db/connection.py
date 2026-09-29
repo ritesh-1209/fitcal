@@ -6,7 +6,10 @@ Handles MongoDB Motor async client connection with graceful in-memory fallback.
 import os
 import logging
 from typing import Dict, Any, List, Optional
-from backend.app.db.food_seed import INDIAN_FOOD_SEED
+try:
+    from app.db.food_seed import INDIAN_FOOD_SEED
+except ImportError:
+    from backend.app.db.food_seed import INDIAN_FOOD_SEED
 
 logger = logging.getLogger("smartcal.db")
 

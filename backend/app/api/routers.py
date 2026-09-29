@@ -7,25 +7,46 @@ from fastapi import APIRouter, HTTPException, Depends, status
 from typing import List, Dict, Any, Optional
 from datetime import datetime
 
-from backend.app.schemas.schemas import (
-    UserRegisterRequest, UserLoginRequest, TokenResponse,
-    UserProfileSchema, DailyTargetResponse,
-    NaturalLanguageMealRequest, MealParseResponse,
-    ActivityInputSchema, ActivityResultSchema,
-    BudgetRecommendRequest, BudgetMealOption,
-    AIChatRequest, AIChatResponse,
-    DashboardSummary
-)
-from backend.app.engines.calorie_engine import (
-    calculate_bmr, calculate_tdee, calculate_goal_calories,
-    calculate_macro_targets, calculate_remaining_calories
-)
-from backend.app.engines.activity_engine import calculate_calories_burned
-from backend.app.engines.budget_engine import generate_budget_meal_options
-from backend.app.engines.suggestion_engine import generate_daily_suggestions
-from backend.app.ai.gemini_service import parse_meal_text, explain_budget_recommendation, chat_with_fitness_assistant
-from backend.app.db.food_seed import INDIAN_FOOD_SEED, search_food_in_seed
-from backend.app.db.connection import get_db
+try:
+    from app.schemas.schemas import (
+        UserRegisterRequest, UserLoginRequest, TokenResponse,
+        UserProfileSchema, DailyTargetResponse,
+        NaturalLanguageMealRequest, MealParseResponse,
+        ActivityInputSchema, ActivityResultSchema,
+        BudgetRecommendRequest, BudgetMealOption,
+        AIChatRequest, AIChatResponse,
+        DashboardSummary
+    )
+    from app.engines.calorie_engine import (
+        calculate_bmr, calculate_tdee, calculate_goal_calories,
+        calculate_macro_targets, calculate_remaining_calories
+    )
+    from app.engines.activity_engine import calculate_calories_burned
+    from app.engines.budget_engine import generate_budget_meal_options
+    from app.engines.suggestion_engine import generate_daily_suggestions
+    from app.ai.gemini_service import parse_meal_text, explain_budget_recommendation, chat_with_fitness_assistant
+    from app.db.food_seed import INDIAN_FOOD_SEED, search_food_in_seed
+    from app.db.connection import get_db
+except ImportError:
+    from backend.app.schemas.schemas import (
+        UserRegisterRequest, UserLoginRequest, TokenResponse,
+        UserProfileSchema, DailyTargetResponse,
+        NaturalLanguageMealRequest, MealParseResponse,
+        ActivityInputSchema, ActivityResultSchema,
+        BudgetRecommendRequest, BudgetMealOption,
+        AIChatRequest, AIChatResponse,
+        DashboardSummary
+    )
+    from backend.app.engines.calorie_engine import (
+        calculate_bmr, calculate_tdee, calculate_goal_calories,
+        calculate_macro_targets, calculate_remaining_calories
+    )
+    from backend.app.engines.activity_engine import calculate_calories_burned
+    from backend.app.engines.budget_engine import generate_budget_meal_options
+    from backend.app.engines.suggestion_engine import generate_daily_suggestions
+    from backend.app.ai.gemini_service import parse_meal_text, explain_budget_recommendation, chat_with_fitness_assistant
+    from backend.app.db.food_seed import INDIAN_FOOD_SEED, search_food_in_seed
+    from backend.app.db.connection import get_db
 
 router = APIRouter()
 

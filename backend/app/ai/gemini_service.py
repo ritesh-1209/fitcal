@@ -12,10 +12,16 @@ import json
 import re
 import logging
 from typing import Dict, Any, List, Optional
-from backend.app.schemas.schemas import MealParseResponse, ParsedFoodItem, BudgetMealOption
-from backend.app.db.food_seed import search_food_in_seed
-from backend.app.engines.nutrition_engine import calculate_item_nutrition, aggregate_meal_nutrition
-from backend.app.engines.budget_engine import generate_budget_meal_options
+try:
+    from app.schemas.schemas import MealParseResponse, ParsedFoodItem, BudgetMealOption
+    from app.db.food_seed import search_food_in_seed
+    from app.engines.nutrition_engine import calculate_item_nutrition, aggregate_meal_nutrition
+    from app.engines.budget_engine import generate_budget_meal_options
+except ImportError:
+    from backend.app.schemas.schemas import MealParseResponse, ParsedFoodItem, BudgetMealOption
+    from backend.app.db.food_seed import search_food_in_seed
+    from backend.app.engines.nutrition_engine import calculate_item_nutrition, aggregate_meal_nutrition
+    from backend.app.engines.budget_engine import generate_budget_meal_options
 
 logger = logging.getLogger("smartcal.ai")
 
